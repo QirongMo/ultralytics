@@ -61,15 +61,22 @@ class BaseDataset(Dataset):
         single_cls=False,
         classes=None,
         fraction=1.0,
+        task_name="",
+        log_dir="",
+        class_names = []
     ):
         """Initialize BaseDataset with given configuration and options."""
         super().__init__()
+        self.task_name = task_name
+        self.log_dir = log_dir
+        self.class_names = class_names
         self.img_path = img_path
         self.imgsz = imgsz
         self.augment = augment
         self.single_cls = single_cls
         self.prefix = prefix
         self.fraction = fraction
+        self.label_files = []
         self.im_files = self.get_img_files(self.img_path)
         self.labels = self.get_labels()
         self.update_labels(include_class=classes)  # single_cls and include_class

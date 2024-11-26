@@ -37,6 +37,7 @@ from .utils import (
     verify_image,
     verify_image_label,
 )
+import os
 
 # Ultralytics dataset *.cache version, >= 1.0.0 for YOLOv8
 DATASET_CACHE_VERSION = "1.0.3"
@@ -132,8 +133,10 @@ class YOLODataset(BaseDataset):
 
     def get_labels(self):
         """Returns dictionary of labels for YOLO training."""
-        self.label_files = img2label_paths(self.im_files)
-        cache_path = Path(self.label_files[0]).parent.with_suffix(".cache")
+        if not self.label_files:
+            self.label_files = img2label_paths(self.im_files) 
+        cache_dir = Path(self.log_dir).parent if self.log_dir else Path(os.getcwd())
+        cache_path = cache_dir/(self.task_name+".cache")
         try:
             cache, exists = load_dataset_cache_file(cache_path), True  # attempt to load a *.cache file
             assert cache["version"] == DATASET_CACHE_VERSION  # matches current version
