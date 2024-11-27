@@ -86,6 +86,8 @@ from .transformer import (
     TransformerLayer,
 )
 
+from .FaceboxMoudle import CReLu, InceptionV2
+
 __all__ = (
     "Conv",
     "Conv2",
@@ -156,4 +158,6 @@ __all__ = (
     "C2fCIB",
     "Attention",
     "PSA",
+    "CReLu", 
+    "InceptionV2"
 )
