@@ -87,6 +87,7 @@ from .transformer import (
 )
 
 from .FaceboxMoudle import CReLu, InceptionV2
+from .attention import CoordAtt
 
 __all__ = (
     "Conv",
@@ -159,5 +160,7 @@ __all__ = (
     "Attention",
     "PSA",
     "CReLu", 
-    "InceptionV2"
+    "InceptionV2",
+    "CoordAtt"
 )
+
